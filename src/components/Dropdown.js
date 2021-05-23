@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { FaSort } from 'react-icons/fa'
 
-const Dropdown = ({ label, options, onChange, selectedBg, value }) => {
+const Dropdown = ({ label, options = [], onChange, selectedBg, value }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [optionsShowing, setOptionsShowing] = useState(options)
     const [search, setSearch] = useState('')
@@ -135,11 +135,16 @@ const Select = styled.div`
             max-height: 300px;
             overflow-y: auto;
 
-            li:last-child {
-                .option {
-                    border-bottom: none;
+            li {
+                margin: 0;
+
+                &:last-child {
+                    .option {
+                        border-bottom: none;
+                    }
                 }
             }
+
         }
     }
 `
