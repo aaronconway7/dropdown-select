@@ -9,13 +9,15 @@ const Dropdown = ({ label, options = [], onChange, selectedBg, value }) => {
     const [selected, setSelected] = useState(value)
 
     useEffect(() => {
-        setOptionsShowing(
-            options
-                .filter((option) =>
-                    option.name.toLowerCase().includes(search.toLowerCase())
-                )
-                .sort((a, b) => a.name.localeCompare(b.name))
-        )
+        if (options.length > 0) {
+            setOptionsShowing(
+                options
+                    .filter((option) =>
+                        option.name.toLowerCase().includes(search.toLowerCase())
+                    )
+                    .sort((a, b) => a.name.localeCompare(b.name))
+            )
+        }
     }, [search, options])
 
     const handleSearch = (e) => {
@@ -26,25 +28,31 @@ const Dropdown = ({ label, options = [], onChange, selectedBg, value }) => {
     const handleOptionSelect = (option) => {
         setSelected(option)
         setIsOpen(false)
-        onChange(option)
+        onChange && onChange(option)
     }
 
     return (
-        <Select>
-            {label && <span className={`select-label`}>{label}</span>}
+        <Select data-testid={`dropdown-component`}>
+            {label && (
+                <span className={`select-label`} data-testid={`label`}>
+                    {label}
+                </span>
+            )}
             <SelectButton
                 className={`select`}
+                data-testid={`select-button`}
                 onClick={() => setIsOpen((prev) => !prev)}
             >
-                {selected ? selected.name : `Select`}{' '}
+                {selected ? selected.name : `Select`}
                 <FaSort className={`icon`} />
             </SelectButton>
             {isOpen && (
-                <div className={`dropdown`}>
+                <div className={`dropdown`} data-testid={`dropdown`}>
                     {options.length >= 10 && (
-                        <div className={`search`}>
+                        <div className={`search`} data-testid={`search`}>
                             <input
                                 type={`search`}
+                                data-testid={`search-input`}
                                 placeholder={`Search for a user`}
                                 value={search}
                                 onChange={handleSearch}
@@ -144,7 +152,6 @@ const Select = styled.div`
                     }
                 }
             }
-
         }
     }
 `

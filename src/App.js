@@ -10,7 +10,7 @@ function App() {
             <Dropdown
                 label={`Assign Item:`}
                 options={assignees}
-                onChange={(option) => console.log('option', option)}
+                onChange={(option) => console.log(`option`, option)}
                 // selectedBg={`#83c503`}
                 // value={{ name: 'William', id: 9 }}
             />
