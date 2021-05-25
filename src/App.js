@@ -1,18 +1,21 @@
+import { useState } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 
 import Dropdown from './components/Dropdown'
 import assignees from './data/assignees'
 
 function App() {
+    const [selected, setSelected] = useState()
+
     return (
         <LandingPage>
             <GlobalStyle />
             <Dropdown
                 label={`Assign Item:`}
                 options={assignees}
-                onChange={(option) => console.log(`option`, option)}
+                onChange={(option) => setSelected(option)}
+                value={selected}
                 // selectedBg={`#83c503`}
-                // value={{ name: 'William', id: 9 }}
             />
         </LandingPage>
     )

@@ -33,9 +33,9 @@ describe(`Dropdown`, () => {
         })
 
         test(`expect dropdown to show correct option when selected`, () => {
-            userEvent.click(screen.getByTestId(`select-button`))
-            userEvent.click(screen.getByText(`Dave`))
             const selectElement = screen.getByTestId(`select-button`)
+            userEvent.click(selectElement)
+            userEvent.click(screen.getByText(`Dave`))
             expect(selectElement.textContent).toBe(`Dave`)
         })
 

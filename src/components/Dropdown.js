@@ -6,7 +6,6 @@ const Dropdown = ({ label, options = [], onChange, selectedBg, value }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [optionsShowing, setOptionsShowing] = useState(options)
     const [search, setSearch] = useState('')
-    const [selected, setSelected] = useState(value)
 
     useEffect(() => {
         if (options.length > 0) {
@@ -21,12 +20,11 @@ const Dropdown = ({ label, options = [], onChange, selectedBg, value }) => {
     }, [search, options])
 
     const handleSearch = (e) => {
-        const value = e.target.value
-        setSearch(value)
+        const searchQuery = e.target.value
+        setSearch(searchQuery)
     }
 
     const handleOptionSelect = (option) => {
-        setSelected(option)
         setIsOpen(false)
         onChange && onChange(option)
     }
@@ -43,7 +41,7 @@ const Dropdown = ({ label, options = [], onChange, selectedBg, value }) => {
                 data-testid={`select-button`}
                 onClick={() => setIsOpen((prev) => !prev)}
             >
-                {selected ? selected.name : `Select`}
+                {value ? value.name : `Select`}
                 <FaSort className={`icon`} />
             </SelectButton>
             {isOpen && (
@@ -70,7 +68,7 @@ const Dropdown = ({ label, options = [], onChange, selectedBg, value }) => {
                                         onClick={() =>
                                             handleOptionSelect(option)
                                         }
-                                        isSelected={selected?.id === option.id}
+                                        isSelected={value?.id === option.id}
                                         selectedBg={selectedBg}
                                     >
                                         {option.name}
