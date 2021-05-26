@@ -1,7 +1,12 @@
-# Dropdown ⬇️
-> Passfort UX Engineer tech test
+# Dropdown Select ⬇️
 
-For ease, to view the dropdown component I have hosted this app @ https://aaron-passfort-ux-engineer-tech-test.netlify.app/ so you can quickly see it in action with the given `assignees.json` data.
+> UX Engineer tech test for [Passfort](https://www.passfort.com/). Instructions for the assignment can be found @ `UX_Engineer_tech_test.pdf` in the root directory.
+
+![Screenshot](public/dropdown-select.png)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7cd3d92b-0f1c-4c07-bb4f-d4e784fefeec/deploy-status)](https://app.netlify.com/sites/dropdown-select/deploys)
+
+For ease, to view the dropdown component I have hosted this app @ https://dropdown-select.netlify.app so you can quickly see it in action with the given `assignees.json` data.
 
 - You can find the component in `components/Dropdown.js`
 - You can find the tests in `components/Dropdown.test.js`
@@ -28,17 +33,30 @@ I saw in the job description that working with storybook was desirable. Although
 
 ### Basic
 ```js
-<Dropdown
-    label={`Assign Item:`}
-    options={[
-        { name: 'Andy', id: 1 },
-        { name: 'George', id: 2 },
-        { name: 'Clive', id: 3 },
-        { name: 'Peter', id: 4 },
-        { name: 'Cleatus', id: 5 },
-    ]}
-    onChange={(option) => console.log(`option`, option)}
-/>
+import React from 'react';
+
+const App = () => {
+    const [selected, setSelected] = useState()
+
+    return (
+        <div>
+            <Dropdown
+                label={'Assign Item:'}
+                options={[
+                    { name: 'Andy', id: 1 },
+                    { name: 'George', id: 2 },
+                    { name: 'Clive', id: 3 },
+                    { name: 'Peter', id: 4 },
+                    { name: 'Cleatus', id: 5 },
+                ]}
+                onChange={(option) => setSelected(option)}
+                value={selected}
+            />
+        </div>
+    )
+}
+
+export default App
 ```
 
 ### Props
@@ -46,10 +64,10 @@ I saw in the job description that working with storybook was desirable. Although
 - `options` *Array* - The options you want to display in the dropdown. Must be an array of objects containing `name` and `id` keys.
 - `onChange` *Func* - Subscribe to change events. When a new option is selected, value object is passed through.
 - `selectedBg` *String* - The background colour of the individual selected in the dropdown list.
-- `value` *Object* - Default selected option of the dropdown if you wish to manually set one. Must be an object containing `name` and `id` keys.
+- `value` *Object* - Value of the dropdown. Must be an object containing `name` and `id` keys.
 
 ## Testing
-For my tests I used (React Testing Library)[https://testing-library.com/docs/react-testing-library/intro/]. I made the following passing tests:
+For my tests I used [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/). I made the following passing tests:
 
 1. Dropdown renders ☑️
 2. Label appears correctly when supplied as a prop ☑️
